@@ -1,0 +1,32 @@
+{
+  "name": "useautosuggest",
+  "version": "0.1.0",
+  "description": "Custom React hook to derive partial word completion and next word suggestions provided historical inputs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robtaussig/useAutoSuggest.git"
+  },
+  "keywords": [
+    "react",
+    "autosuggest",
+    "auto-suggest",
+    "hooks"
+  ],
+  "author": "Robert Taussig <robert.taussig@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robtaussig/useAutoSuggest/issues"
+  },
+  "homepage": "https://github.com/robtaussig/useAutoSuggest#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0"
+  }
+}
