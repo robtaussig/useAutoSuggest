@@ -1,6 +1,6 @@
-import { AutoSuggest } from '../autosuggest';
-import { MarkovChain } from '../markovchain';
-import { Trie } from '../trie';
+import { AutoSuggest } from '../lib/autosuggest';
+import { MarkovChain } from '../lib/markovchain';
+import { Trie } from '../lib/trie';
 
 describe('React useAutoSuggest', () => {
 
