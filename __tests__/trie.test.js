@@ -1,4 +1,4 @@
-import { Trie } from '../lib/trie';
+import Trie from '../lib/trie';
 
 describe('React useAutoSuggest', () => {
 
