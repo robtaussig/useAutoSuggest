@@ -25,9 +25,10 @@ yarn test
 
 ## Example Useage
 ```js
-import React, { useState, useCallback, todos } from 'react';
+import React, { useState, useCallback } from 'react';
 import useAutoSuggest from 'react-use-autosuggest';
 
+/*
 const todos = [
   {
     title: 'Clean Kitchen',
@@ -42,8 +43,9 @@ const todos = [
     description: 'Already tried once, but have to call again',
   }
 ];
+*/
 
-export const DemoComponent = () => {
+export const DemoComponent = ({ todos }) => {
   const [titleInput, setTitleInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
 
