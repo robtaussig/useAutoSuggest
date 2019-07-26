@@ -1,6 +1,11 @@
 # useAutoSuggest React Hook
 Performant, hybrid auto-suggest system that accepts an input string and returns an array of word completions and/or suggested next words (if the provided input is a known word itself).
 
+## Online Demo
+Begins with a fresh slate. You can enter text into the textarea and 'train' the autosuggest, so future suggestions will be guided by your previous inputs, or you can test performance by training it with the entire play of A Midsummer Night's Dream (text is dynamically imported, parsed, and processed on the button click)
+
+[Link](https://cbdz9.csb.app/)
+
 ## Why
 I had a few goals in mind while developing this tool:
 1) First and foremost, I of course wanted a performant solution to taking user input and returning a list of values that are *probably* what the user intends to enter,
@@ -292,6 +297,3 @@ const markovChain = {
 ```
 ## What this is not
 An important (and perhaps obvious) caveat of this tool is that it requires data to be provided in order to inform what it should consider desired outputs. If you want, you can hard-code an array of every word in the English dictionary and feed it to the hook in advance. It will take a bit of (computer) time to build the trie and markovChain (less than a second), but going forward it will process inputs at virtually the same speed as if it was provided a paragraph of information. But in my opinion, the power of this tool comes in your ability to train it to deliver results based on different contexts, and can even evolve over the current session, as every time the user enters a value that modifies the datasource (e.g., titles of all todos created), the future suggestions become more accurate.
-
-## Coming Soon
-- Online Demo
