@@ -100,21 +100,32 @@ export const DemoComponent = ({ todos }) => {
 1) User types 'c' into the title field
 2) titleSuggestions is returned as ['clean', 'call']
 3) User types/selects 'clean' into the title field
-4) titleSuggestions is returned as [' kitchen', ' bathroom'] (note the space preceeding word continuations)
-5) User selects ' kitchen', resulting in the title input to have a value of 'clean kitchen'
-6) No more values are returned because kitchen is a valid word and the input data does not contain any continuations from 'kitchen' (there are in previousDescriptions, but not previousTitles)
+4) titleSuggestions is returned as [' kitchen', ' bathroom']
+  (note the space preceeding word continuations)
+5) User selects ' kitchen', resulting in the title input to
+  have a value of 'clean kitchen'
+6) No more values are returned because kitchen is a valid word
+  and the input data does not contain any continuations from
+  'kitchen' (there are in previousDescriptions, but not previousTitles)
 
 // Description input
 
 1) User types 'c' into the description textfield
 2) descriptionSuggestions is returned as ['care', 'clean', 'call']
 3) Use types/selects 'clean' into the description textfield
-4) descriptionSuggestions is returned as [' the'], which based on the user's previous behavior, is more likely to reflect their intent in the description field as it does in the title field (where the previous suggestions were the target of the verb, instead of 'the')
-5) User types/selects ' the', which changes the descriptionInput to 'clean the'
+4) descriptionSuggestions is returned as [' the'], which based on
+  the user's previous behavior, is more likely to reflect their intent
+  in the description field as it does in the title field (where the
+  previous suggestions were the target of the verb, instead of 'the')
+5) User types/selects ' the', which changes the descriptionInput to
+  'clean the'
 6) descriptionSuggestions is returned as [' trash']
-7) Assuming the user likes to click on shiny buttons, this can result in an infinite loop going from ' trash' -> ' but' -> ' need'* -> ' to'** -> ' clean' -> ' the'*** -> ' trash' -> ...
+7) Assuming the user likes to click on shiny buttons, this can result
+  in an infinite loop going from ' trash' -> ' but' -> ' need'* ->
+  ' to'** -> ' clean' -> ' the'*** -> ' trash' -> ...
 
-* will also include the option of 'needs' as that is also a valid word from the first description
+* will also include the option of 'needs' as that is also a valid word
+  from the first description
 ** will also have ' be' and ' call' as possible options
 *** will also have ' sink' as a viable continuation
 ```
@@ -126,7 +137,10 @@ This tool utilizes two abstract data structures to generate its suggestions: tri
 
 ```js
 const inputData = ['car', 'cat', 'cab', 'cats'];
-//A trie will process the input data and create a tree of nodes, each node representing a character that points to other nodes. In a naive form, the above input might look something like:
+// A trie will process the input data and create a tree
+// of nodes, each node representing a character that points
+// to other nodes. In a naive form, the above input might look
+// something like:
 
 const rootNode = {
   next: {
@@ -160,7 +174,8 @@ const rootNode = {
   },
   isWord: false,
 };
-//The above can be improved by removing the `next` key altogether and simply pointing to an object of key value pairs as such:
+// The above can be improved by removing the `next` key altogether
+// and simply pointing to an object of key value pairs as such:
 
 const rootNode = {
   c: {
@@ -173,7 +188,10 @@ const rootNode = {
     }
   }
 };
-//The above is clearly more space efficient and easier to digest, but it doesn't indicate whether a word is valid or not (We can't assume an empty object is the only indicator of a valid word, as c -> a -> t does not point to an empty object). One solution might be:
+// The above is clearly more space efficient and easier to digest,
+// but it doesn't indicate whether a word is valid or not (We can't
+// assume an empty object is the only indicator of a valid word, as
+// c -> a -> t does not point to an empty object). One solution might be:
 
 const validWord = '*';
 
@@ -193,9 +211,12 @@ const rootNode = {
     }
   }
 };
-//Now we're talking. Given an input of 'ca', we can derive the ouput using simple indexing:
+// Now we're talking. Given an input of 'ca', we can derive the ouput
+// using simple indexing:
 
-//In practice we should check for undefined values before indexing into nested structures. Or we can travel into the future and use nullish coalescing (https://github.com/tc39/proposal-nullish-coalescing)
+// In practice we should check for undefined values before indexing into
+// nested structures. Or we can travel into the future and use nullish
+// coalescing (https://github.com/tc39/proposal-nullish-coalescing)
 const result = rootNode['c']['a']
 /*
 {
@@ -212,7 +233,11 @@ const result = rootNode['c']['a']
 }
 */
 
-//If we iterated over the entries of result, we would hit all possible character continuations along with an object containing their continuations. At each level, we would check to see if the key is equal to '*' (which would be bad practice if an asterisk is a valid character in your input form):
+// If we iterated over the entries of result, we would hit all possible
+// character continuations along with an object containing their
+// continuations. At each level, we would check to see if the key is
+// equal to '*' (which would be bad practice if an asterisk is a valid
+// character in your input form):
 
 result.entries.forEach(([char, next]) => {
   if (char === validWord) {
@@ -295,7 +320,10 @@ const markovChain = {
 
   },
 }
-//So given an inputValue of `is`, we would iterate over each key in markoveChain['is'], and then sort the keys by the value of markovChain['is'][<key>], which in this case would be `happy`, `outside`, and `warm` in an arbitrary order (each having 1 occurence).
+// So given an inputValue of `is`, we would iterate over each key in
+// markoveChain['is'], and then sort the keys by the value of
+// markovChain['is'][<key>], which in this case would be `happy`, `outside`,
+// and `warm` in an arbitrary order (each having 1 occurence).
 ```
 ## What this is not
 An important (and perhaps obvious) caveat of this tool is that it requires data to be provided in order to inform what it should consider desired outputs. If you want, you can hard-code an array of every word in the English dictionary and feed it to the hook in advance. It will take a bit of (computer) time to build the trie and markovChain (less than a second), but going forward it will process inputs at virtually the same speed as if it was provided a paragraph of information. But in my opinion, the power of this tool comes in your ability to train it to deliver results based on different contexts, and can even evolve over the current session, as every time the user enters a value that modifies the datasource (e.g., titles of all todos created), the future suggestions become more accurate.
