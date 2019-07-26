@@ -24,3 +24,5 @@ export const useAutoSuggest = (inputValue, historicalEntries, limit) => {
 
   return suggestionList;
 };
+
+export default useAutoSuggest;

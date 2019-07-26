@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.useAutoSuggest = void 0;
+exports["default"] = exports.useAutoSuggest = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -48,3 +48,5 @@ var useAutoSuggest = function useAutoSuggest(inputValue, historicalEntries, limi
 };
 
 exports.useAutoSuggest = useAutoSuggest;
+var _default = useAutoSuggest;
+exports["default"] = _default;
