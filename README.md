@@ -143,36 +143,37 @@ const inputData = ['car', 'cat', 'cab', 'cats'];
 // something like:
 
 const rootNode = {
+  isWord: false,
   next: {
     c: {
+      isWord: false,
       next: {
         a: {
+          isWord: false,
           next: {
+            isWord: false,
             r: {
-              next: {},
               isWord: true,
+              next: {},
             },
             t: {
+              isWord: true,
               next: {
                 s: {
-                  next: {},
                   isWord: true,
+                  next: {},
                 }
               },
-              isWord: true,
             },
             b: {
-              next: {},
               isWord: true,
+              next: {},
             },
           },
-          isWord: false,
         }
       },
-      isWord: false,
     }
   },
-  isWord: false,
 };
 // The above can be improved by removing the `next` key altogether
 // and simply pointing to an object of key value pairs as such:
@@ -202,8 +203,10 @@ const rootNode = {
         '*': true,
       },
       t: {
-        s: {},
         '*': true,
+        s: {
+          '*': true,
+        },
       },
       b: {
         '*': true,
@@ -224,8 +227,10 @@ const result = rootNode['c']['a']
     '*': true,
   },
   t: {
-    s: {},
     '*': true,
+    s: {
+      '*': true,
+    },
   },
   b: {
     '*': true,
