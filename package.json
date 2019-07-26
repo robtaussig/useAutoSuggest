@@ -2,7 +2,11 @@
   "name": "react-use-autosuggest",
   "version": "0.3.0",
   "description": "Custom React hook to derive partial word completion and next word suggestions provided historical inputs",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
     "test": "node_modules/.bin/jest --verbose",
     "compile": "babel src -d dist"
