@@ -45,7 +45,7 @@ export const DemoComponent = () => {
   // Important to map using useMemo so that
   // useAutoSuggest does not re-process the 
   // data every time the component updates,
-  // as Array.map returns a new reference
+  // as Array.map returns a new reference.
   const previousTitles = useMemo(() => {
     return todos.map(({ title }) => title);
   }, [todos]);
@@ -292,3 +292,6 @@ const markovChain = {
 ```
 ## What this is not
 An important (and perhaps obvious) caveat of this tool is that it requires data to be provided in order to inform what it should consider desired outputs. If you want, you can hard-code an array of every word in the English dictionary and feed it to the hook in advance. It will take a bit of (computer) time to build the trie and markovChain (less than a second), but going forward it will process inputs at virtually the same speed as if it was provided a paragraph of information. But in my opinion, the power of this tool comes in your ability to train it to deliver results based on different contexts, and can even evolve over the current session, as every time the user enters a value that modifies the datasource (e.g., titles of all todos created), the future suggestions become more accurate.
+
+## Coming Soon
+- Online Demo
