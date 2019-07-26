@@ -37,15 +37,6 @@ describe('React useAutoSuggest', () => {
       expect(Object.keys(rootNode)).toHaveLength(2); // ['c', 'r'];
     });
 
-    test('Completion of a word is indicated by adding the key \'*  *\', with a value of true', () => {
-      const trie = new Trie();
-      const rootNode = trie.rootNode;
-
-      trie.add(['car', 'cab', 'cat', 'rat']);
-
-      expect(rootNode['c']['a']['r']['*  *']).toEqual(true);
-    });
-
     test('It does not mutate the input array', () => {
       const trie = new Trie();
       const inputArray = ['car', 'cab', 'cat', 'rat'];
@@ -67,12 +58,12 @@ describe('React useAutoSuggest', () => {
        * ('', {c, r}, 3)
        * ('c', {a}, 2)
        * ('ca', {r,b,t}, 1)
-       * ('car', {'*  *'}, 0)
-       * ('cab', {'*  *'}, 0)
-       * ('cat', {'*  *'}, 0)
+       * ('car', {Symbol('*')}, 0)
+       * ('cab', {Symbol('*')}, 0)
+       * ('cat', {Symbol('*')}, 0)
        * ('r', {a}, 2)
        * ('ra', {t}, 1)
-       * ('rat', {'*  *'}, 0)
+       * ('rat', {Symbol('*')}, 0)
        */
       expect(mock).toHaveBeenCalledTimes(9);
     });

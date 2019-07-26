@@ -1,6 +1,6 @@
 {
   "name": "useautosuggest",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Custom React hook to derive partial word completion and next word suggestions provided historical inputs",
   "main": "index.js",
   "scripts": {
