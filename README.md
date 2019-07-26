@@ -38,7 +38,7 @@ const todos = [
   }
 ];
 
-export const DemoComponent = ({ todos }) => {
+export const DemoComponent = () => {
   const [titleInput, setTitleInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
 
