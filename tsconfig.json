@@ -9,6 +9,7 @@
       "jsx": "react",
       "skipLibCheck": true,
       "lib": ["es2017"],
+      "downlevelIteration": true
   },
   
   "files": [
