@@ -218,8 +218,8 @@ const rootNode = {
 // using simple indexing:
 
 // In practice we should check for undefined values before indexing into
-// nested structures. Or we can travel into the future and use nullish
-// coalescing (https://github.com/tc39/proposal-nullish-coalescing)
+// nested structures. Or we can travel into the future and use optional
+// chaining (https://github.com/TC39/proposal-optional-chaining)
 const result = rootNode['c']['a']
 /*
 {
