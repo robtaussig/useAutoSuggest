@@ -1,4 +1,4 @@
-import MarkovChain from '../lib/markovchain';
+import MarkovChain from '../dist/lib/markovchain';
 
 describe('React useAutoSuggest', () => {
 

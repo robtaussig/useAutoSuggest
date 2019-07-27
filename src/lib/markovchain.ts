@@ -1,9 +1,15 @@
-export default class MarkovChain {
-  constructor() {
-    this.chain = {};
-  }
+interface FollowCount {
+  [key: string]: number
+}
 
-  record(valuesArray) {
+interface Chain {
+  [key: string]: FollowCount
+}
+
+export default class MarkovChain {
+  private chain: Chain = {};
+
+  record(valuesArray: string[]): void {
     if (Array.isArray(valuesArray) === false) {
       throw new TypeError(`Invalid arguments. Expected an array, received ${typeof valuesArray}`);
     }
@@ -18,7 +24,7 @@ export default class MarkovChain {
     }
   }
 
-  suggest(value) {
+  suggest(value:string): string[] {
     if (this.chain[value]) {
       return Object.entries(this.chain[value])
         .sort(([aKey, aValue], [bKey, bValue]) => aValue > bValue ? -1 : 1)

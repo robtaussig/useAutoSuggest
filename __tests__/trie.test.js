@@ -1,4 +1,4 @@
-import Trie from '../lib/trie';
+import Trie from '../dist/lib/trie';
 
 describe('React useAutoSuggest', () => {
 
@@ -52,8 +52,8 @@ describe('React useAutoSuggest', () => {
     test('It recursively calls itself given a depth greater than 1', () => {
       const trie = new Trie();
       trie.add(['car', 'cab', 'cat', 'rat']);
-      const mock = jest.spyOn(trie, '_findCompleteWordsAtDepth');
-      trie._findCompleteWordsAtDepth('', trie.rootNode, 3);
+      const mock = jest.spyOn(trie, 'findCompleteWordsAtDepth');
+      trie.findCompleteWordsAtDepth('', trie.rootNode, 3);
       /**
        * ('', {c, r}, 3)
        * ('c', {a}, 2)

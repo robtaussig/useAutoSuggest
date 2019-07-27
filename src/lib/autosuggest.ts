@@ -1,16 +1,18 @@
 import MarkovChain from './markovchain';
 import Trie from './trie';
 
-const formatWord = word => word.trim().toLowerCase();
+const formatWord = (word: string):string => word.trim().toLowerCase();
+
+interface Visited {
+  [key: string]: boolean
+}
 
 export default class AutoSuggest {
-  constructor() {
-    this.visited = {};
-    this.trie = new Trie();
-    this.markovChain = new MarkovChain();
-  }
+  private visited: Visited = {};
+  private trie: Trie = new Trie();
+  private markovChain: MarkovChain = new MarkovChain();
 
-  process(historicalEntries) {
+  process(historicalEntries:string[]):AutoSuggest {
     if (Array.isArray(historicalEntries) === false) {
       throw new TypeError(`Invalid arguments. Expected an array of, received ${typeof historicalEntries}`);
     }
@@ -18,11 +20,12 @@ export default class AutoSuggest {
     historicalEntries
       .forEach(entry => {
         if (typeof entry !== 'object') {
-          const formatted = formatWord(entry.replace(/\s+/g, " ")).split(' ');
+          const formatted:string = formatWord(entry.replace(/\s+/g, " "));
           if (this.visited[formatted] !== true) {
             this.visited[formatted] = true;
-            this.trie.add(formatted);
-            this.markovChain.record(formatted);
+            const splitByWord = formatted.split(' ');
+            this.trie.add(splitByWord);
+            this.markovChain.record(splitByWord);
           }
         }
       });
@@ -31,8 +34,9 @@ export default class AutoSuggest {
     return this
   }
 
-  generateSuggestions(inputValue) {
+  generateSuggestions(inputValue:string):string[] {
     if (!inputValue) return [];
+
     const splitSentence = inputValue.trim().split(' ');
     const lastWord = formatWord(splitSentence[splitSentence.length - 1]);
     const results = this.markovChain.suggest(lastWord)

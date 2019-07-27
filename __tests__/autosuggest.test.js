@@ -1,4 +1,4 @@
-import AutoSuggest from '../lib/autosuggest';
+import AutoSuggest from '../dist/lib/autosuggest';
 
 describe('React useAutoSuggest', () => {
 
