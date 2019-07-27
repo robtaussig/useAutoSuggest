@@ -10,7 +10,7 @@
   "scripts": {
     "test": "node_modules/.bin/jest --verbose",
     "compile": "node_modules/.bin/tsc -p .",
-    "publish": "npm run compile && npm run test && npm publish"
+    "publish": "npm run compile && npm run test && git push && npm publish"
   },
   "repository": {
     "type": "git",
