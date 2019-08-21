@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import AutoSuggest from './lib/autosuggest';
-import { UseAutoSuggest } from './types';
 
-export const useAutoSuggest: UseAutoSuggest = (inputValue, historicalEntries, limit) => {
+export const useAutoSuggest = (inputValue: string, historicalEntries: string[], limit?: number): string[] => {
   const [suggestionList, setSuggestionList] = useState([]);
   const autoSuggest = useRef(null);
 
