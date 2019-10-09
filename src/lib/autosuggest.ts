@@ -36,12 +36,12 @@ export default class AutoSuggest {
 
   generateSuggestions(inputValue:string):string[] {
     if (!inputValue) return [];
-
+    const isNewWord = inputValue.endsWith(' ');
     const splitSentence = inputValue.trim().split(' ');
     const lastWord = formatWord(splitSentence[splitSentence.length - 1]);
     const results = this.markovChain.suggest(lastWord)
                                     .map(word => ` ${word}`)
-                                    .concat(this.trie.suggest(lastWord))
+                                    .concat(isNewWord ? [] : this.trie.suggest(lastWord))
                                     .filter(result => result !== lastWord);
     return [...new Set(results)];
   }
