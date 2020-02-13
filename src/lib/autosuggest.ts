@@ -11,6 +11,7 @@ export default class AutoSuggest {
   private visited: Visited = {};
   private trie: Trie = new Trie();
   private markovChain: MarkovChain = new MarkovChain();
+  constructor(readonly trieDepth = 4) {}
 
   process(historicalEntries:string[]):AutoSuggest {
     if (Array.isArray(historicalEntries) === false) {
@@ -41,7 +42,7 @@ export default class AutoSuggest {
     const lastWord = formatWord(splitSentence[splitSentence.length - 1]);
     const results = this.markovChain.suggest(lastWord)
                                     .map(word => ` ${word}`)
-                                    .concat(isNewWord ? [] : this.trie.suggest(lastWord))
+                                    .concat(isNewWord ? [] : this.trie.suggest(lastWord, this.trieDepth))
                                     .filter(result => result !== lastWord);
     return [...new Set(results)];
   }
